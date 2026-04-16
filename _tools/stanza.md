@@ -5,5 +5,5 @@ resource_url: https://stanfordnlp.github.io/stanza/
 tutorial_url: https://stanfordnlp.github.io/stanza/tutorials.html
 rating: 4
 tags:
-  - librería
+  - Librería
 ---
