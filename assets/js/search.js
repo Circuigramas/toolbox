@@ -1,12 +1,27 @@
 (function () {
-  const data      = JSON.parse(document.getElementById('tools-data').textContent);
-  const searchEl  = document.getElementById('search');
-  const countEl   = document.getElementById('count');
-  const resultsEl = document.getElementById('results');
-  const tagBtns   = document.querySelectorAll('.tag-btn');
+  const data             = JSON.parse(document.getElementById('tools-data').textContent);
+  const searchEl         = document.getElementById('search');
+  const countEl          = document.getElementById('count');
+  const resultsEl        = document.getElementById('results');
+  const tagBtns          = document.querySelectorAll('.tag-btn');
+  const subtagFiltersEl  = document.getElementById('subtag-filters');
+  const subtagSelect     = document.getElementById('subtag-select');
 
-  let activeTag = '';
-  let query     = '';
+  // Build map: mainTag → sorted array of subtags
+  const subtagMap = {};
+  data.forEach(tool => {
+    (tool.tags || []).forEach(tag => {
+      if (!subtagMap[tag]) subtagMap[tag] = new Set();
+      (tool.subtags || []).forEach(st => subtagMap[tag].add(st));
+    });
+  });
+  Object.keys(subtagMap).forEach(k => {
+    subtagMap[k] = [...subtagMap[k]].sort((a, b) => a.localeCompare(b, 'es'));
+  });
+
+  let activeTag    = '';
+  let activeSubtag = '';
+  let query        = '';
 
   function esc(s) {
     return String(s)
@@ -26,11 +41,11 @@
     return html + '</div>';
   }
 
-  function renderTags(tags) {
-    if (!tags || tags.length === 0) return '';
-    return '<div class="tags">' +
-      tags.map(t => `<span class="tag">${esc(t)}</span>`).join('') +
-      '</div>';
+  function renderTags(tags, subtags) {
+    const mainSpans = (tags || []).map(t => `<span class="tag">${esc(t)}</span>`).join('');
+    const subSpans  = (subtags || []).map(t => `<span class="tag tag--sub">${esc(t)}</span>`).join('');
+    if (!mainSpans && !subSpans) return '';
+    return `<div class="tags">${mainSpans}${subSpans}</div>`;
   }
 
   function renderLinks(tool) {
@@ -48,16 +63,32 @@
     return '<div class="card-links">' + links.join('') + '</div>';
   }
 
+  function updateSubtagDropdown() {
+    const subtags = activeTag ? (subtagMap[activeTag] || []) : [];
+    activeSubtag = '';
+    if (subtags.length === 0) {
+      subtagFiltersEl.style.display = 'none';
+      return;
+    }
+    subtagSelect.innerHTML =
+      '<option value="">Todos los subtemas</option>' +
+      subtags.map(st => `<option value="${esc(st)}">${esc(st)}</option>`).join('');
+    subtagSelect.value = '';
+    subtagFiltersEl.style.display = '';
+  }
+
   function render() {
     const q = query.toLowerCase();
 
     const filtered = data.filter(tool => {
       const matchesTag    = activeTag === '' || (tool.tags || []).includes(activeTag);
+      const matchesSubtag = activeSubtag === '' || (tool.subtags || []).includes(activeSubtag);
       const matchesSearch = q === '' ||
         tool.title.toLowerCase().includes(q) ||
         (tool.summary || '').toLowerCase().includes(q) ||
-        (tool.tags || []).some(t => t.toLowerCase().includes(q));
-      return matchesTag && matchesSearch;
+        (tool.tags || []).some(t => t.toLowerCase().includes(q)) ||
+        (tool.subtags || []).some(t => t.toLowerCase().includes(q));
+      return matchesTag && matchesSubtag && matchesSearch;
     }).sort((a, b) => a.title.localeCompare(b.title, 'es'));
 
     const n = filtered.length;
@@ -75,7 +106,7 @@
           ${stars(tool.rating)}
         </div>
         <p class="preview">${esc(tool.summary || '')}</p>
-        ${renderTags(tool.tags)}
+        ${renderTags(tool.tags, tool.subtags)}
         ${renderLinks(tool)}
       </div>
     `).join('');
@@ -90,8 +121,14 @@
     btn.addEventListener('click', () => {
       activeTag = btn.dataset.tag;
       tagBtns.forEach(b => b.classList.toggle('active', b === btn));
+      updateSubtagDropdown();
       render();
     });
+  });
+
+  subtagSelect.addEventListener('change', e => {
+    activeSubtag = e.target.value;
+    render();
   });
 
   const tagParam = new URLSearchParams(location.search).get('tag');

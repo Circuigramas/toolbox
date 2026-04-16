@@ -16,6 +16,12 @@ permalink: /
   {% endfor %}
 </div>
 
+<div id="subtag-filters" class="subtag-filters" style="display:none">
+  <select id="subtag-select">
+    <option value="">Todos los subtemas</option>
+  </select>
+</div>
+
 <div class="list-container">
   <p class="count" id="count"></p>
   <div id="results"></div>
@@ -32,7 +38,8 @@ permalink: /
       "rating":          {{ tool.rating          | default: 0  | jsonify }},
       "resource_url":    {{ tool.resource_url    | default: "" | jsonify }},
       "circuigramas_url":{{ tool.circuigramas_url| default: "" | jsonify }},
-      "tutorial_url":    {{ tool.tutorial_url    | default: "" | jsonify }}
+      "tutorial_url":    {{ tool.tutorial_url    | default: "" | jsonify }},
+      "subtags":         {% if tool.subtags %}{{ tool.subtags | jsonify }}{% else %}[]{% endif %}
     }{% unless forloop.last %},{% endunless %}
   {% endfor %}
 ]

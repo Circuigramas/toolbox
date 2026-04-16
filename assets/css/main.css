@@ -106,6 +106,27 @@ footer a { color: var(--dark); text-decoration: none; }
 .tag-btn:hover  { background: var(--border); }
 .tag-btn.active { background: var(--dark); color: #ffffff; }
 
+/* ── Subtag dropdown ── */
+.subtag-filters {
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem 1rem 0.6rem;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.subtag-filters select {
+  padding: 0.35rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  background: var(--card-bg);
+  color: var(--dark);
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.subtag-filters select:focus { border-color: var(--accent); }
+
 /* ── Tool list (index) ── */
 .list-container {
   max-width: 800px;
