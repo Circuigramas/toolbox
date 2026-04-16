@@ -14,6 +14,8 @@ Visita el sitio: https://circuigramas.github.io/toolbox/
 - **plataforma**: plataformas y hubs de recursos
 - **API**: servicios y APIs externas
 - **framework**: frameworks de entrenamiento o despliegue
+- **libro**: libros sobre temas relacionados con PLN
+- **artículos**: sobre temas no cubiertos en los libros o relevantes al PLN
 
 ---
 
