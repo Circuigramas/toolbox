@@ -1,0 +1,300 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:          #f5f8ff;
+  --header-bg:   #dbe7ff;
+  --dark:        #0d1b4b;
+  --border:      #b8ccf0;
+  --muted:       #4a6496;
+  --accent:      #1d4ed8;
+  --tag-bg:      #dbe7ff;
+  --tag-sub-bg:  #e0f2fe;
+  --card-bg:     #ffffff;
+  --shadow:      rgba(13, 27, 75, 0.08);
+  --shadow-hover: rgba(13, 27, 75, 0.14);
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--dark);
+  line-height: 1.6;
+}
+
+/* ── Header ── */
+header {
+  background: var(--header-bg);
+  color: var(--dark);
+  padding: 2rem 1rem 1.5rem;
+  text-align: center;
+}
+header .site-title {
+  color: var(--dark);
+  text-decoration: none;
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.site-logo {
+  height: 80px;
+  width: auto;
+  display: block;
+  margin: 0 auto 0.75rem;
+}
+header p {
+  margin-top: 0.4rem;
+  opacity: 0.75;
+  font-size: 0.95rem;
+}
+
+/* ── Footer ── */
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+footer a { color: var(--dark); text-decoration: none; }
+
+/* ── Search bar ── */
+.search-bar {
+  display: flex;
+  justify-content: center;
+  padding: 1.25rem 1rem 0.75rem;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.search-bar input {
+  width: 100%;
+  max-width: 560px;
+  padding: 0.65rem 1rem;
+  font-size: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  outline: none;
+  background: var(--card-bg);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.search-bar input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.12);
+}
+
+/* ── Tag filter bar ── */
+.tag-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  padding: 0.75rem 1rem;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.tag-btn {
+  background: var(--tag-bg);
+  color: var(--dark);
+  border: 1px solid transparent;
+  border-radius: 99px;
+  padding: 0.3rem 0.85rem;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.tag-btn:hover  { background: var(--border); }
+.tag-btn.active { background: var(--dark); color: #ffffff; }
+
+/* ── Tool list (index) ── */
+.list-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem 4rem;
+}
+.count { font-size: 0.85rem; color: var(--muted); margin-bottom: 1rem; }
+
+.card {
+  background: var(--card-bg);
+  border-radius: 10px;
+  padding: 1.1rem 1.4rem 1rem;
+  margin-bottom: 0.75rem;
+  box-shadow: 0 1px 3px var(--shadow);
+  border-left: 4px solid var(--accent);
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 0.15s, transform 0.15s;
+  display: block;
+}
+.card:hover {
+  box-shadow: 0 3px 10px var(--shadow-hover);
+  transform: translateY(-1px);
+}
+
+.card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.card h2 {
+  font-size: 1.05rem;
+  color: var(--dark);
+  font-weight: 600;
+}
+.card .preview {
+  font-size: 0.88rem;
+  color: var(--muted);
+  margin-top: 0.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Stars ── */
+.stars {
+  display: inline-flex;
+  gap: 0.05rem;
+  font-size: 1rem;
+  line-height: 1;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.stars--large { font-size: 1.35rem; }
+.star--full  { color: var(--accent); }
+.star--empty { color: var(--border); }
+
+/* ── Card links row ── */
+.card-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.7rem;
+}
+
+/* ── Tags (shared) ── */
+.tags { margin-top: 0.55rem; display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.tag {
+  background: var(--tag-bg);
+  color: var(--dark);
+  font-size: 0.75rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 99px;
+  text-decoration: none;
+}
+a.tag:hover { background: var(--border); }
+.tag.tag--sub { background: var(--tag-sub-bg); color: #1a3a5c; }
+
+/* ── Link buttons (shared between card and tool page) ── */
+.link-btn {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.25rem 0.7rem;
+  border-radius: 99px;
+  text-decoration: none;
+  transition: opacity 0.15s;
+  white-space: nowrap;
+}
+.link-btn:hover { opacity: 0.8; }
+
+.link-resource {
+  background: var(--accent);
+  color: #ffffff;
+}
+.link-circuigramas {
+  background: var(--dark);
+  color: #ffffff;
+}
+.link-tutorial {
+  background: var(--tag-bg);
+  color: var(--dark);
+  border: 1px solid var(--border);
+}
+.link-detail {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
+
+.empty { text-align: center; color: var(--muted); margin-top: 3rem; }
+
+/* ── Tool page ── */
+.tool-page {
+  max-width: 760px;
+  margin: 2rem auto;
+  padding: 0 1rem 4rem;
+}
+.breadcrumb {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+.breadcrumb a { color: var(--dark); text-decoration: none; }
+
+.tool-header {
+  margin-bottom: 1.5rem;
+}
+.tool-header-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+.tool-title {
+  font-size: 1.7rem;
+  color: var(--dark);
+  line-height: 1.2;
+}
+.tool-summary {
+  font-size: 1rem;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+  border-left: 3px solid var(--accent);
+  padding-left: 0.75rem;
+}
+
+.tool-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+}
+.tool-links .link-btn {
+  font-size: 0.88rem;
+  padding: 0.4rem 1rem;
+}
+
+.tool-figure { margin: 1.5rem 0; }
+.tool-figure img {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.tool-body {
+  margin-top: 1.75rem;
+  font-size: 0.97rem;
+  line-height: 1.8;
+}
+.tool-body h2 { font-size: 1.15rem; color: var(--dark); margin: 1.75rem 0 0.5rem; }
+.tool-body h3 { font-size: 1rem; color: var(--dark); margin: 1.25rem 0 0.4rem; }
+.tool-body p  { margin-bottom: 0.9rem; }
+.tool-body ul, .tool-body ol { margin: 0.5rem 0 0.9rem 1.5rem; }
+.tool-body li { margin-bottom: 0.3rem; }
+.tool-body a  { color: var(--accent); }
+.tool-body code {
+  background: var(--tag-bg);
+  padding: 0.1em 0.4em;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+.tool-body pre {
+  background: var(--tag-bg);
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin-bottom: 1rem;
+}
+.tool-body pre code { background: none; padding: 0; }

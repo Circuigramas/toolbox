@@ -1,0 +1,27 @@
+title: Toolbox PLN
+description: Repositorio de herramientas para el Procesamiento del Lenguaje Natural
+baseurl: /toolbox
+url: https://circuigramas.github.io
+
+collections:
+  tools:
+    output: true
+    permalink: /tools/:slug/
+
+defaults:
+  - scope:
+      path: ""
+      type: tools
+    values:
+      layout: tool
+
+plugins:
+  - jekyll-seo-tag
+
+markdown: kramdown
+kramdown:
+  input: GFM
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
