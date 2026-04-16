@@ -5,5 +5,5 @@ resource_url: https://www.nltk.org
 tutorial_url: https://www.nltk.org/book/
 rating: 3
 tags:
-  - librería
+  - Librería
 ---
