@@ -4,5 +4,5 @@ summary: "Modelo BERT preentrenado en español, referencia para tareas de compre
 resource_url: https://huggingface.co/dccuchile/bert-base-spanish-wwm-cased
 rating: 4
 tags:
-  - modelo
+  - Modelo
 ---
