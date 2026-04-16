@@ -5,5 +5,5 @@ resource_url: https://radimrehurek.com/gensim/
 tutorial_url: https://radimrehurek.com/gensim/auto_examples/index.html
 rating: 4
 tags:
-  - librería
+  - Librería
 ---
