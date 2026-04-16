@@ -4,5 +4,5 @@ summary: "Corpus del español y catalán anotado con información sintáctica, s
 resource_url: https://clic.ub.edu/corpus/es/ancora
 rating: 4
 tags:
-  - dataset
+  - Dataset
 ---
