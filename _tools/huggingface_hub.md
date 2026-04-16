@@ -4,5 +4,5 @@ summary: "Plataforma centralizada para compartir, descubrir y desplegar modelos,
 resource_url: https://huggingface.co
 rating: 5
 tags:
-  - plataforma
+  - Plataforma
 ---
