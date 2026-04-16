@@ -26,15 +26,13 @@ permalink: /
   {% assign sorted_tools = site.tools | sort: "title" %}
   {% for tool in sorted_tools %}
     {
-      "slug":            {{ tool.slug            | jsonify }},
       "title":           {{ tool.title           | jsonify }},
       "summary":         {{ tool.summary         | default: "" | jsonify }},
       "tags":            {{ tool.tags            | default: [] | jsonify }},
       "rating":          {{ tool.rating          | default: 0  | jsonify }},
       "resource_url":    {{ tool.resource_url    | default: "" | jsonify }},
       "circuigramas_url":{{ tool.circuigramas_url| default: "" | jsonify }},
-      "tutorial_url":    {{ tool.tutorial_url    | default: "" | jsonify }},
-      "detail_url":      {{ tool.url             | relative_url | jsonify }}
+      "tutorial_url":    {{ tool.tutorial_url    | default: "" | jsonify }}
     }{% unless forloop.last %},{% endunless %}
   {% endfor %}
 ]

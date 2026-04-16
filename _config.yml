@@ -5,15 +5,7 @@ url: https://circuigramas.github.io
 
 collections:
   tools:
-    output: true
-    permalink: /tools/:slug/
-
-defaults:
-  - scope:
-      path: ""
-      type: tools
-    values:
-      layout: tool
+    output: false
 
 plugins:
   - jekyll-seo-tag

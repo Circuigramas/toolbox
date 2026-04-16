@@ -10,9 +10,9 @@
 
   function esc(s) {
     return String(s)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;');
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;');
   }
 
   function stars(rating) {
@@ -23,8 +23,7 @@
         ? '<span class="star star--full">★</span>'
         : '<span class="star star--empty">☆</span>';
     }
-    html += '</div>';
-    return html;
+    return html + '</div>';
   }
 
   function renderTags(tags) {
@@ -37,16 +36,13 @@
   function renderLinks(tool) {
     const links = [];
     if (tool.resource_url) {
-      links.push(`<a href="${esc(tool.resource_url)}" target="_blank" rel="noopener" class="link-btn link-resource" onclick="event.stopPropagation()">Recurso ↗</a>`);
+      links.push(`<a href="${esc(tool.resource_url)}" target="_blank" rel="noopener" class="link-btn link-resource">Recurso ↗</a>`);
     }
     if (tool.circuigramas_url) {
-      links.push(`<a href="${esc(tool.circuigramas_url)}" target="_blank" rel="noopener" class="link-btn link-circuigramas" onclick="event.stopPropagation()">Reseña ↗</a>`);
+      links.push(`<a href="${esc(tool.circuigramas_url)}" target="_blank" rel="noopener" class="link-btn link-circuigramas">Reseña ↗</a>`);
     }
     if (tool.tutorial_url) {
-      links.push(`<a href="${esc(tool.tutorial_url)}" target="_blank" rel="noopener" class="link-btn link-tutorial" onclick="event.stopPropagation()">Tutorial ↗</a>`);
-    }
-    if (tool.detail_url) {
-      links.push(`<a href="${esc(tool.detail_url)}" class="link-btn link-detail">Más info →</a>`);
+      links.push(`<a href="${esc(tool.tutorial_url)}" target="_blank" rel="noopener" class="link-btn link-tutorial">Tutorial ↗</a>`);
     }
     if (links.length === 0) return '';
     return '<div class="card-links">' + links.join('') + '</div>';
@@ -56,8 +52,7 @@
     const q = query.toLowerCase();
 
     const filtered = data.filter(tool => {
-      const matchesTag = activeTag === '' ||
-        (tool.tags || []).includes(activeTag);
+      const matchesTag    = activeTag === '' || (tool.tags || []).includes(activeTag);
       const matchesSearch = q === '' ||
         tool.title.toLowerCase().includes(q) ||
         (tool.summary || '').toLowerCase().includes(q) ||
@@ -65,16 +60,16 @@
       return matchesTag && matchesSearch;
     }).sort((a, b) => a.title.localeCompare(b.title, 'es'));
 
-    countEl.textContent =
-      filtered.length + ' herramienta' + (filtered.length !== 1 ? 's' : '');
+    const n = filtered.length;
+    countEl.textContent = n + (n === 1 ? ' herramienta' : ' herramientas');
 
-    if (filtered.length === 0) {
+    if (n === 0) {
       resultsEl.innerHTML = '<p class="empty">No se encontraron herramientas.</p>';
       return;
     }
 
     resultsEl.innerHTML = filtered.map(tool => `
-      <div class="card" role="article">
+      <div class="card">
         <div class="card-top">
           <h2>${esc(tool.title)}</h2>
           ${stars(tool.rating)}
@@ -99,7 +94,6 @@
     });
   });
 
-  // Pre-activate tag from ?tag= query param
   const tagParam = new URLSearchParams(location.search).get('tag');
   if (tagParam) {
     const match = [...tagBtns].find(b => b.dataset.tag === tagParam);
