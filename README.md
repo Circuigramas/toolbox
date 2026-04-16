@@ -8,12 +8,12 @@ Visita el sitio: https://circuigramas.github.io/toolbox/
 
 ## Tags disponibles
 
-- **librería** — librerías Python u otros lenguajes para PLN
-- **dataset** — corpus y conjuntos de datos anotados
-- **modelo** — modelos preentrenados (BERT, GPT, etc.)
-- **plataforma** — plataformas y hubs de recursos
-- **API** — servicios y APIs externas
-- **framework** — frameworks de entrenamiento o despliegue
+- **librería**: librerías Python u otros lenguajes para PLN
+- **dataset**: corpus y conjuntos de datos anotados
+- **modelo**: modelos preentrenados (BERT, GPT, etc.)
+- **plataforma**: plataformas y hubs de recursos
+- **API**: servicios y APIs externas
+- **framework**: frameworks de entrenamiento o despliegue
 
 ---
 
